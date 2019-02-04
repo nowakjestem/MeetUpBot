@@ -1,0 +1,6 @@
+0. show wit.ai predefined entities
+1. create wit.ai service & middleware
+2. listen to intents in routes/botman.php
+3. handle incoming question inline
+4. handle incoming question in conversation
+

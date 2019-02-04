@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\BotMan\Conversations\LocationSearchConversation;
+use App\BotMan\Middlewares\WitAiMiddleware;
 use BotMan\BotMan\BotMan;
 use Illuminate\Http\Request;
 use App\Conversations\ExampleConversation;
@@ -14,6 +16,8 @@ class BotManController extends Controller
     public function handle()
     {
         $botman = app('botman');
+        $witAiMiddleware = app(WitAiMiddleware::class);
+        $botman->middleware->received($witAiMiddleware);
 
         $botman->listen();
     }
@@ -30,8 +34,8 @@ class BotManController extends Controller
      * Loaded through routes/botman.php
      * @param  BotMan $bot
      */
-    public function startConversation(BotMan $bot)
+    public function startLocationSearchConversation(BotMan $bot)
     {
-        $bot->startConversation(new ExampleConversation());
+        $bot->startConversation(app(LocationSearchConversation::class));
     }
 }
